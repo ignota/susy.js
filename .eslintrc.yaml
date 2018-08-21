@@ -1,0 +1,127 @@
+env:
+    browser: true
+    es6: true
+    node: true
+extends:
+    - standard
+parser: babel-eslint
+parserOptions:
+    ecmaFeatures:
+        experimentalObjectRestSpread: true
+        impliedStrict: true
+        jsx: true
+    ecmaVersion: 8
+    sourceType: module
+plugins:
+    - babel
+    - import
+    - node
+    - promise
+    - standard
+rules:
+    babel/new-cap:
+        - warn
+        -
+            capIsNew: false
+            newIsCap: true
+    babel/no-invalid-this: warn
+    babel/object-curly-spacing:
+        - error
+        - always
+    babel/quotes:
+        - error
+        - single
+        -
+            allowTemplateLiterals: true
+            avoidEscape: true
+    babel/semi:
+        - error
+        - never
+    babel/no-unused-expressions:
+        - error
+        -
+            allowShortCircuit: true
+            allowTernary: true
+
+    comma-dangle:
+        - error
+        -
+            arrays: always-multiline
+            exports: always-multiline
+            functions: always-multiline
+            imports: always-multiline
+            objects: always-multiline
+    eol-last: off
+    generator-star-spacing:
+        - error
+        -
+            after: true
+            before: false
+            method: before
+    indent:
+        - error
+        - 4
+        -
+            ArrayExpression: first
+            CallExpression:
+                arguments: first
+            FunctionDeclaration:
+                body: 1
+                parameters: first
+            FunctionExpression:
+                parameters: first
+                body: 1
+            MemberExpression: off
+            ObjectExpression: first
+            outerIIFEBody: 1
+            SwitchCase: 1
+            VariableDeclarator:
+                const: 3
+                let: 2
+                var: 2
+    jsx-quotes:
+        - error
+        - prefer-single
+    new-cap: off
+    no-cond-assign: off
+    no-fallthrough: off
+    no-invalid-this: off
+    no-multiple-empty-lines: off
+    no-return-assign: off
+    no-trailing-spaces: off
+    no-undef: error
+    no-unused-expressions: off
+    no-unused-vars:
+        - error
+        -
+            args: all
+            argsIgnorePattern: ^_
+            varsIgnorePattern: ^_.+
+    no-use-before-define:
+        - error
+        -
+            classes: false
+            functions: false
+            variables: true
+    object-curly-spacing: off
+    quotes: off
+    semi: off
+    sort-imports:
+        - error
+        - ignoreCase: true
+    sort-keys:
+        - warn
+        - asc
+        -
+            caseSensitive: false
+            natural: true
+    space-infix-ops: warn
+    space-before-function-paren:
+        - error
+        -
+            anonymous: never
+            asyncArrow: always
+            named: never
+    template-curly-spacing:
+        - error
+        - always

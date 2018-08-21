@@ -1,0 +1,5 @@
+--require ./spec/babel-register.js
+--require ./spec/setup.js
+--check-leaks
+--inline-diffs
+spec/**/*-spec.js
