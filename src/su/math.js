@@ -2,7 +2,7 @@ import * as validate from './validate'
 import { mapAddUnits } from './utilities'
 
 export function calcSpan(span, columns, gutters, spread, containerSpread, shouldValidate = true) {
-    containerSpread ||= spread
+    containerSpread ??= spread
 
     if (shouldValidate) {
         span = validate.validSpan(span)
@@ -76,4 +76,32 @@ export function calcSum(columns, gutters, spread, shouldValidate = true) {
         fixed: calc,
         fluid,
     }
+}
+
+export function sum(columns, gutters, spread, shouldValidate = true) {
+    if (shouldValidate) {
+        columns = validate.validColumns(columns)
+        gutters = validate.validGutters(gutters)
+        spread = validate.validSpread(spread)
+    }
+
+    const columnSum = columns.reduce((sum, col) => {
+        const { length, unit } = validate.validMeasure(col)
+
+        sum.unit = unit
+        sum.length += length
+
+        return sum
+    }, { length: 0, unit: undefined })
+
+    gutters = validate.validMeasure(gutters)
+
+    const gutterSum = (Math.ceil(columns.length) + spread) * gutters.length
+
+    const total = {
+        length: gutterSum > 0 ? columnSum.length + gutterSum : columnSum.length,
+        unit: columnSum.unit,
+    }
+
+    return total
 }

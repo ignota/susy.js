@@ -1,11 +1,26 @@
 import * as validate from './validate'
-import { needsCalcOutput, sum } from './utilities'
-import { calcSpan } from './math'
+import { calcSpan, sum } from './math'
+import { needsCalcOutput } from './utilities'
+
+export function gutter({ columns, containerSpread, gutters }) {
+    if ((typeof gutters === 'number' || typeof gutters === 'string') && (gutters === 0 || /[A-Za-z]+$/.test(gutters))) {
+        return gutters
+    }
+
+    if (needsCalcOutput(gutters, columns, gutters, -1, false)) {
+        return calcSpan(gutters, columns, gutters, -1, containerSpread, false)
+    }
+
+    const container = sum(columns, gutters, containerSpread)
+    gutters = validate.validMeasure(gutters)
+
+    return `${ gutters.length / container.length * 100 }%`
+}
 
 export function slice({ columns, location = 1, shouldValidate = true, span }) {
     if (shouldValidate) {
         columns = validate.validColumns(columns)
-        location = validate.validLocation(location)
+        location = validate.validLocation(span, location, columns)
     }
 
     span = validate.validMeasure(span)
@@ -19,9 +34,9 @@ export function slice({ columns, location = 1, shouldValidate = true, span }) {
         const columnMeasure = validate.validMeasure(columnValue)
 
         if (columnMeasure.unit) {
-            subColumns.push(`${ columnMeasure.value * remainder }${ columnMeasure.unit }`)
+            subColumns.push(`${ columnMeasure.length * remainder }${ columnMeasure.unit }`)
         } else {
-            subColumns.push(columnMeasure.value * remainder)
+            subColumns.push(columnMeasure.length * remainder)
         }
     }
 
@@ -29,19 +44,19 @@ export function slice({ columns, location = 1, shouldValidate = true, span }) {
 }
 
 export function span({ columns, containerSpread, gutters, location = 1, span, spread }) {
-    containerSpread ||= spread
+    containerSpread ??= spread
 
     span = validate.validSpan(span)
     columns = validate.validColumns(columns)
     gutters = validate.validGutters(gutters)
     spread = validate.validSpread(spread)
 
-    if (typeof span === 'string' && /\w+$/.test(span)) {
+    if (typeof span === 'string' && /[A-Za-z]+$/.test(span)) {
         return span
     }
 
     if (typeof span === 'string' || typeof span === 'number') {
-        location = validate.validLocation(location)
+        location = validate.validLocation(span, location, columns)
         span = slice({ columns, location, shouldValidate: false, span })
     }
 
@@ -59,19 +74,4 @@ export function span({ columns, containerSpread, gutters, location = 1, span, sp
     const container = sum(columns, gutters, containerSpread, false)
 
     return `${ spanWidth.length / container.length * 100 }%`
-}
-
-export function gutter({ columns, containerSpread, gutters }) {
-    if ((typeof gutters === 'number' || typeof gutters === 'string') && (gutters === 0 || /\w+$/.test(gutters))) {
-        return gutters
-    }
-
-    if (needsCalcOutput(gutters, columns, gutters, -1, false)) {
-        return calcSpan(gutters, columns, gutters, -1, containerSpread, false)
-    }
-
-    const container = sum(columns, gutters, containerSpread)
-    gutters = validate.validMeasure(gutters)
-
-    return `${ gutters.length / container.length * 100 }%`
 }

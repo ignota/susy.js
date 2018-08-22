@@ -6,7 +6,9 @@ function normalize(config, context) {
     const normal = R.clone(config)
 
     ;['containerSpread', 'spread'].forEach(s => {
-        normal[s] = normalizeSpread(normal[s])
+        if (normal[s]) {
+            normal[s] = normalizeSpread(normal[s])
+        }
     })
 
     if (normal.columns) {
@@ -73,7 +75,9 @@ function normalizeSpread(spread) {
         wider: 1,
     }
 
-    return normalSpread[spread] || spread
+    return Object.keys(normalSpread).includes(spread)
+        ? normalSpread[spread]
+        : spread
 }
 
 export default normalize

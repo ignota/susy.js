@@ -37,6 +37,10 @@ export function needsCalcOutput(span, columns, gutters, spread, shouldValidate =
         gutters = validate.validGutters(gutters)
     }
 
+    if (!Array.isArray(span)) {
+        span = [span]
+    }
+
     const hasGutter = span.length > 0 || (spread && spread >= 0)
     const check = hasGutter
         ? span.concat(gutters)
@@ -52,32 +56,4 @@ export function needsCalcOutput(span, columns, gutters, spread, shouldValidate =
     }
 
     return !isComparable(gutters, ...columns)
-}
-
-export function sum(columns, gutters, spread, shouldValidate = true) {
-    if (shouldValidate) {
-        columns = validate.validColumns(columns)
-        gutters = validate.validGutters(gutters)
-        spread = validate.validSpread(spread)
-    }
-
-    const columnSum = columns.reduce((sum, col) => {
-        const { length, unit } = validate.validMeasure(col)
-
-        sum.unit = unit
-        sum.length += length
-
-        return sum
-    }, {})
-
-    gutters = validate.validMeasure(gutters)
-
-    const gutterSum = Math.ceil(columns.length + spread) * gutters.length
-
-    const total = {
-        length: columnSum.length + gutterSum,
-        unit: columnSum.unit,
-    }
-
-    return total
 }

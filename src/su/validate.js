@@ -57,7 +57,7 @@ export function validMeasure(measure, silentFailure = false) {
     }
 
     let match
-    if (typeof measure === 'string' && !(match = /([.\d]+)(\w+)?/.exec(measure))) {
+    if (typeof measure === 'string' && !(match = /([.\d]+)([A-Za-z]+)?/.exec(measure))) {
         return silentFailure
             ? null
             : throw new Error(`[${ typeof measure }] '${ measure }' cannot be parsed as a number with unit.`)
