@@ -1,0 +1,79 @@
+import * as validate from './validate'
+import { mapAddUnits } from './utilities'
+
+export function calcSpan(span, columns, gutters, spread, containerSpread, shouldValidate = true) {
+    containerSpread ||= spread
+
+    if (shouldValidate) {
+        span = validate.validSpan(span)
+        columns = validate.validColumns(columns)
+        gutters = validate.validGutters(gutters)
+        spread = validate.validSpread(spread)
+        containerSpread = validate.validSpread(containerSpread)
+    }
+
+    span = calcSum(span, gutters, spread, false)
+    const context = calcSum(columns, gutters, containerSpread, false)
+
+    let calc = `${ span.fixed || '' }`
+    let fluidCalc = `(100% - ${ context.fixed })`
+
+    if (!span.fluid) {
+        fluidCalc = null
+    } else if (span.fluid !== context.fluid) {
+        span.fluid = `* ${ span.fluid }`
+        context.fluid = context.fluid ? `/ ${ context.fluid }` : ''
+        fluidCalc = `(${ fluidCalc } ${ context.fluid } ${ span.fluid })`
+    }
+
+    if (fluidCalc) {
+        calc = calc === ''
+            ? ''
+            : `${ calc } + `
+        calc = calc + fluidCalc
+    }
+
+    return `calc(${ calc })`
+}
+
+export function calcSum(columns, gutters, spread, shouldValidate = true) {
+    if (shouldValidate) {
+        columns = validate.validSpan(columns)
+        gutters = validate.validGutters(gutters)
+        spread = validate.validSpread(spread)
+    }
+
+    let fluid = 0
+    let fixed = {}
+    let calc = null
+
+    gutters = validate.validMeasure(gutters)
+    gutters = `${ gutters.length * (columns.length + spread) }${ gutters.unit || '' }`
+
+    for (const col of columns.concat(gutters)) {
+        if (!validate.validMeasure(col)?.unit) {
+            fluid += col
+        } else {
+            fixed = mapAddUnits(fixed, col)
+        }
+    }
+
+    for (const [unit, total] of Object.entries(fixed)) {
+        calc = calc
+            ? `${ calc } + ${ total }${ unit }`
+            : `${ total }${ unit }`
+    }
+
+    if (calc && calc.includes('+')) {
+        calc = `(${ calc })`
+    }
+
+    fluid = fluid === 0
+        ? null
+        : fluid
+
+    return {
+        fixed: calc,
+        fluid,
+    }
+}
