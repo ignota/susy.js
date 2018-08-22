@@ -2,7 +2,15 @@ import * as su from '../su'
 import { compile } from './syntax-helpers'
 import R from 'ramda'
 
-export const span = (s, ...shorthand) => {
+export const span = (...shorthand) => {
+    shorthand = shorthand.map(s => {
+        if (typeof s === 'number' || Array.isArray(s)) {
+            return config => ({ ...config, span: s })
+        }
+
+        return s
+    })
+
     let susy
 
     if (typeof shorthand[shorthand.length - 1] !== 'function') {
@@ -10,9 +18,6 @@ export const span = (s, ...shorthand) => {
     }
 
     let config = R.pipe(...shorthand)({})
-    config = typeof s === 'number'
-        ? { ...config, span: s }
-        : s(config)
 
     const output = compile(config, susy)
     if (output.span) {

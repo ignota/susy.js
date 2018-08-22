@@ -2,13 +2,13 @@ import R from 'ramda'
 
 export const all = config => ({ ...config, span: 'all' })
 
-export const alpha = config => ({ ...config, location: 'alpha' })
+export const alpha = count => config => ({ ...config, location: 'alpha', span: count })
 
 export const at = location => config => ({ ...config, location })
 
-export const first = config => ({ ...config, location: 'first' })
+export const first = count => config => ({ ...config, location: 'first', span: count })
 
-export const last = config => ({ ...config, location: 'last' })
+export const last = count => config => ({ ...config, location: 'last', span: count })
 
 export const of = (columns, ...shorthand) => config => {
     const ofConfig = R.pipe(...shorthand)({})
@@ -25,6 +25,6 @@ export const of = (columns, ...shorthand) => config => {
     }
 }
 
-export const omega = config => ({ ...config, location: 'omega' })
+export const omega = count => config => ({ ...config, location: 'omega', span: count })
 
 export const setGutters = gutters => config => ({ ...config, gutters })
