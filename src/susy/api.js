@@ -27,6 +27,13 @@ export const gutter = (...shorthand) => {
     return su.gutter(context)
 }
 
+export const halfGutter = (...shorthand) => {
+    const g = gutter(...shorthand)
+    const length = Number.parseFloat(g)
+    const match = /([A-Za-z%])$/.exec(g)
+    return `${ length / 2 }${ match[1] }`
+}
+
 export const slice = (...shorthand) => {
     shorthand = shorthand.map(s => {
         if (typeof s === 'number' || Array.isArray(s)) {

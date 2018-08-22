@@ -8,6 +8,7 @@ import {
 } from 'susy/shorthand'
 import {
     gutter,
+    halfGutter,
     slice,
     span,
 } from 'susy/api'
@@ -89,13 +90,11 @@ describe('API Interface', () => {
         })
 
         it('calculates the correct `wider` gutter', () => {
-            const g = gutter(wider)
-            ;(Number.parseFloat(g) / 2).should.almost.equal(0.98039)
+            halfGutter(wider).should.equal('0.9803921568627451%')
         })
 
         it('calculates the correct raw gutter', () => {
-            const g = gutter()
-            ;(Number.parseFloat(g) / 2).should.equal(1)
+            halfGutter().should.equal('1%')
         })
 
         it('calculates the correct width for span(2)', () => {
@@ -103,8 +102,7 @@ describe('API Interface', () => {
         })
 
         it('calculates the correct gutter(6)', () => {
-            const g = gutter(6)
-            ;(Number.parseFloat(g) / 2).should.almost.equal(1.66667)
+            halfGutter(6).should.equal('1.6666666666666667%')
         })
 
         it('calculates the correct width for span(3 of 6)', () => {
@@ -116,8 +114,7 @@ describe('API Interface', () => {
         })
 
         it('calculates the correct gutter(4)', () => {
-            const g = gutter(4)
-            ;(Number.parseFloat(g) / 2).should.almost.equal(2.5)
+            halfGutter(4).should.equal('2.5%')
         })
 
         it('calculates the correct width for span(2 of 4)', () => {

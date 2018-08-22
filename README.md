@@ -44,6 +44,8 @@ These configuration options may also be passed into the core [Susy functions](#s
 ### Susy Functions
 The core Susy API is exposed as three functions, `gutter`, `slice`, and `span`, which map to the Sass functions `su-gutter`, `su-slice`, and `su-span`. These can be imported as named imports directly from the package root. All three accept a variadic argument list, which should start with a list of [shorthand functions](#shorthand-functions) and may optionally end with an object containing [settings](#settings) to be applied to the current calculation.
 
+An additional helper function, `halfGutter`, is also exposed; it returns half the width of a single gutter, handling the ugly conversion from a string to a number and back.
+
 ### Shorthand
 Susy's Sass implementation turns on a very friendly [shorthand](http://oddbird.net/susy/docs/api.html#shorthand) for defining grid spans and context:
 
