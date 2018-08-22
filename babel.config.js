@@ -45,7 +45,7 @@ module.exports = api => ({
             loose: true,
             modules: 'commonjs',
             targets: {
-                node: 'current',
+                browsers: ['last 4 versions'],
             },
             useBuiltIns: 'usage',
         }],

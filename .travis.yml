@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+    - 10
+    - 9
+    - 8
+cache:
+    yarn: true
+script:
+    - yarn lint
+    - yarn test
