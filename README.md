@@ -42,7 +42,7 @@ The package exposes a function called `configure` that takes an object as its on
 These configuration options may also be passed into the core [Susy functions](#susy-functions) as their final argument.
 
 ### Susy Functions
-The core Susy API is exposed as three functions, `gutter`, `slice`, and `span`, which map to the Sass functions `su-gutter`, `su-slice`, and `su-span`. These can be imported as named imports directly from the package root. All three accept a variadic argument list, which should start with a list of [shorthand functions](#shorthand-functions) and may optionally end with an object containing [settings](#settings) to be applied to the current calculation.
+The core Susy API is exposed as three functions, `gutter`, `slice`, and `span`, which map to the Sass functions `susy-gutter`, `susy-slice`, and `susy-span`. These can be imported as named imports directly from the package root. All three accept a variadic argument list, which should start with a list of [shorthand functions](#shorthand) and may optionally end with an object containing [settings](#settings) to be applied to the current calculation.
 
 An additional helper function, `halfGutter`, is also exposed; it returns half the width of a single gutter, handling the ugly conversion from a string to a number and back.
 
