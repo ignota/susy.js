@@ -1,19 +1,19 @@
 env:
-    mocha: true
+  mocha: true
 plugins:
-    - mocha
+  - mocha
 rules:
-    babel/no-unused-expressions: off
+  babel/no-unused-expressions: off
 
-    mocha/handle-done-callback: error
-    mocha/max-top-level-suites: warn
-    mocha/no-exclusive-tests: warn
-    mocha/no-global-tests: error
-    mocha/no-hooks-for-single-case: warn
-    mocha/no-identical-title: warn
-    mocha/no-nested-tests: error
-    mocha/no-pending-tests: warn
-    mocha/no-return-and-callback: error
-    mocha/no-setup-in-describe: warn
-    mocha/no-skipped-tests: warn
-    mocha/no-top-level-hooks: warn
+  mocha/handle-done-callback: error
+  mocha/max-top-level-suites: warn
+  mocha/no-exclusive-tests: warn
+  mocha/no-global-tests: error
+  mocha/no-hooks-for-single-case: warn
+  mocha/no-identical-title: warn
+  mocha/no-nested-tests: error
+  mocha/no-pending-tests: warn
+  mocha/no-return-and-callback: error
+  mocha/no-setup-in-describe: warn
+  mocha/no-skipped-tests: warn
+  mocha/no-top-level-hooks: warn

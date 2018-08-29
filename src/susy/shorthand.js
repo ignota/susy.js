@@ -13,27 +13,27 @@ export const last = count => config => ({ ...config, location: 'last', span: cou
 export const narrow = config => ({ ...config, spread: 'narrow' })
 
 export const of = (...shorthand) => config => {
-    shorthand = shorthand.map(s => {
-        if (typeof s === 'number' || Array.isArray(s)) {
-            return c => ({ ...c, columns: s })
-        }
-
-        return s
-    })
-
-    const ofConfig = shorthand.length
-        ? R.pipe(...shorthand)({})
-        : {}
-
-    if (ofConfig.spread) {
-        ofConfig.containerSpread = ofConfig.spread
-        delete ofConfig.spread
+  shorthand = shorthand.map(s => {
+    if (typeof s === 'number' || Array.isArray(s)) {
+      return c => ({ ...c, columns: s })
     }
 
-    return {
-        ...config,
-        ...ofConfig,
-    }
+    return s
+  })
+
+  const ofConfig = shorthand.length
+    ? R.pipe(...shorthand)({})
+    : {}
+
+  if (ofConfig.spread) {
+    ofConfig.containerSpread = ofConfig.spread
+    delete ofConfig.spread
+  }
+
+  return {
+    ...config,
+    ...ofConfig,
+  }
 }
 
 export const omega = count => config => ({ ...config, location: 'omega', span: count })
