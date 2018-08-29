@@ -1,4 +1,6 @@
 # `@ignota/susy.js`: JavaScript power tools for web layout.
+[![Build Status](https://travis-ci.com/ignota/susy.js.svg?branch=master)](https://travis-ci.com/ignota/susy.js)
+
 Susy.js is a JavaScript port of the powerful [Susy](https://github.com/oddbird/susy) layout toolkit for Sass. It makes the power and flexibility of Susy's venerable grid primitives available to your favorite CSS-in-JS solution---anything from Styled Components to inline React styles---so that you can build your own damn grids with your own damn tools.
 
 ## Resources
