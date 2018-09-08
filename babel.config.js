@@ -31,6 +31,9 @@ module.exports = api => ({
     ['@babel/transform-classes', {
       loose: true,
     }],
+    ['@babel/transform-runtime', {
+      corejs: 2,
+    }],
     api.env() === 'test' && 'istanbul',
     ['module-resolver', {
       root: api.env() === 'test'
