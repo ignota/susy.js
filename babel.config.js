@@ -32,7 +32,6 @@ module.exports = api => ({
       loose: true,
     }],
     api.env() === 'test' && 'istanbul',
-    'lodash',
     ['module-resolver', {
       root: api.env() === 'test'
         ? ['./src', './spec']
