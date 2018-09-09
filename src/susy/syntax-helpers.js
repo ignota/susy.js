@@ -1,7 +1,7 @@
 import normalize from './normalize'
 import { settings } from './settings'
 
-export const compile = (shorthand, config) => {
+export const compile = ({ config, shorthand }) => {
   const normalizedConfig = config ? normalize(settings(config)) : normalize(settings())
   const normalizedShorthand = normalize(shorthand)
 

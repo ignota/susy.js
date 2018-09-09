@@ -1,4 +1,4 @@
-import * as su from '../su'
+import * as su from 'su'
 import { compile } from './syntax-helpers'
 import { of } from './shorthand'
 import R from 'ramda'
@@ -12,17 +12,16 @@ export const gutter = (...shorthand) => {
     return s
   })
 
-  let susy
-
+  let config
   if (typeof shorthand[shorthand.length - 1] !== 'function') {
-    susy = shorthand.pop()
+    config = shorthand.pop()
   }
 
-  const config = shorthand.length
+  shorthand = shorthand.length
     ? of(...shorthand)({})
     : {}
 
-  const context = compile(config, susy)
+  const context = compile({ config, shorthand })
 
   return su.gutter(context)
 }
@@ -43,17 +42,16 @@ export const slice = (...shorthand) => {
     return s
   })
 
-  let susy
-
+  let config
   if (typeof shorthand[shorthand.length - 1] !== 'function') {
-    susy = shorthand.pop()
+    config = shorthand.pop()
   }
 
-  let config = shorthand.length
+  shorthand = shorthand.length
     ? R.pipe(...shorthand)({})
     : {}
 
-  const span = compile(config, susy)
+  const span = compile({ config, shorthand })
 
   return su.slice(span)
 }
@@ -67,17 +65,17 @@ export const span = (...shorthand) => {
     return s
   })
 
-  let susy
-
+  let config
   if (typeof shorthand[shorthand.length - 1] !== 'function') {
-    susy = shorthand.pop()
+    config = shorthand.pop()
   }
 
-  let config = shorthand.length
+  shorthand = shorthand.length
     ? R.pipe(...shorthand)({})
     : {}
 
-  const output = compile(config, susy)
+  const output = compile({ config, shorthand })
+
   if (output.span) {
     return su.span(output)
   }
