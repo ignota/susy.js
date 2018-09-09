@@ -5,6 +5,7 @@ const SUSY_DEFAULTS = {
   containerSpread: 'narrow',
   gutters: 0.25,
   spread: 'narrow',
+  svgGridColors: ['hsla(120, 50%, 50%, 0.5)', 'hsla(120, 50%, 75%, 0.5)'],
 }
 
 let SUSY = {}
