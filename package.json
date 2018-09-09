@@ -1,6 +1,6 @@
 {
   "name": "@ignota/susy.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "JavaScript power tools for web layout.",
   "main": "dist/index.js",
   "repository": "https://github.com/ignota/susy.js.git",
