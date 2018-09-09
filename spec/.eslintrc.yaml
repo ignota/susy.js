@@ -15,5 +15,5 @@ rules:
   mocha/no-pending-tests: warn
   mocha/no-return-and-callback: error
   mocha/no-setup-in-describe: warn
-  mocha/no-skipped-tests: warn
+  mocha/no-skipped-tests: off
   mocha/no-top-level-hooks: warn

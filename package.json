@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.0.0",
+    "condense-whitespace": "^1.0.0",
     "ramda": "^0.25.0"
   }
 }

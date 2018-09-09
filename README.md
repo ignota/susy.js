@@ -87,3 +87,35 @@ gutter(slice(6, at(3)))
 ```
 
 Familiarity with the Sass syntax is highly recommended, and will make picking up the JavaScript version a more-or-less breeze.
+
+
+# SVG Grid Plugin
+Susy.js also implement's Susy's [SVG grid plugin](http://oddbird.net/susy/docs/plugin_svg-grid.html):
+
+```jsx
+import {
+    svgGrid,
+    wider,
+} from '@ignota/susy.js'
+
+<div style={{
+    backgroundAttachment: 'scroll',
+    backgroundImage: svgGrid(6, wider),
+    backgroundRepeat: 'no-repeat',
+}}>
+    I'm a grid container!
+</div>
+```
+
+```html
+<div style="background-attachment:scroll;background-image:url("data:image/svg+xml,<svg fill='url(%23susyjs-svg-gradient)' width='100%' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='susyjs-svg-gradient' spreadMethod='pad' x1='0%' x2='100%' y1='0%' y2='0%'><stop offset='0%' style='stop-color:hsla(120, 50%, 50%, 0.5);' /><stop offset='100%' style='stop-color:hsla(120, 50%, 75%, 0.5);' /></linearGradient></defs><rect height='100%' width='12.903225806451612%' x='3.225806451612903%' /><rect height='100%' width='12.903225806451612%' x='19.35483870967742%' /><rect height='100%' width='12.903225806451612%' x='35.483870967741936%' /><rect height='100%' width='12.903225806451612%' x='51.612903225806456%' /><rect height='100%' width='12.903225806451612%' x='67.74193548387096%' /><rect height='100%' width='12.903225806451612%' x='83.87096774193547%' /></svg>");background-repeat:no-repeat;">
+    I'm a grid container!
+</div>
+```
+
+The function `svgGrid` accepts the same shorthand as the other Susy.js functions and returns the CSS data URL of an SVG illustration visualizing your grid's columns. There are two additional shorthand functions attached to `svgGrid`:
+
+* **`svgGrid.colors`.** Accepts either a single CSS color string (`#9CC`) for solid-colored columns or an array of same to construct a gradient. Defaults to `['hsla(120, 50%, 50%, 0.5)', 'hsla(120, 50%, 75%, 0.5)']`.
+* **`svgGrid.offset`.** Pass in a CSS length to manually configure the default image offset so as to allow for grid edges.
+
+Pass these in with the other shorthand functions to reconfigure the visual grid.
