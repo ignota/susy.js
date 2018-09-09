@@ -50,14 +50,14 @@ export function validMeasure(measure, silentFailure = false) {
     }
   }
 
-  if (typeof measure === 'string' && Number.isNaN(Number.parseFloat(measure))) {
+  if (Number.isNaN(Number.parseFloat(measure))) {
     return silentFailure
       ? null
       : throw new Error(`[${ typeof measure }] '${ measure }' cannot be parsed as a number.`)
   }
 
   let match
-  if (typeof measure === 'string' && !(match = /([.\d]+)([A-Za-z]+)?/.exec(measure))) {
+  if (typeof measure === 'string' && !(match = /([.\d]+)([A-Za-z]+|%)?$/.exec(measure))) {
     return silentFailure
       ? null
       : throw new Error(`[${ typeof measure }] '${ measure }' cannot be parsed as a number with unit.`)
@@ -70,11 +70,11 @@ export function validMeasure(measure, silentFailure = false) {
 }
 
 export function validSpan(span) {
-  if (validMeasure(span, true)) {
+  if (Array.isArray(span) && validColumns(span, true)) {
     return span
   }
 
-  if (Array.isArray(span) && validColumns(span, true)) {
+  if (validMeasure(span, true)) {
     return span
   }
 
