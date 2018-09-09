@@ -89,7 +89,7 @@ gutter(slice(6, at(3)))
 Familiarity with the Sass syntax is highly recommended, and will make picking up the JavaScript version a more-or-less breeze.
 
 
-# SVG Grid Plugin
+### SVG Grid Plugin
 Susy.js also implement's Susy's [SVG grid plugin](http://oddbird.net/susy/docs/plugin_svg-grid.html):
 
 ```jsx
