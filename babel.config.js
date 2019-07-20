@@ -1,5 +1,16 @@
-module.exports = api => ({
-  plugins: [
+module.exports = api => {
+  const presets = [
+    ['@babel/env', {
+      loose: true,
+      modules: process.env.ES_MODULES ? false : 'commonjs',
+      targets: {
+        browsers: ['last 4 versions'],
+      },
+      useBuiltIns: false,
+    }],
+  ]
+
+  const plugins = [
     'autobind-class-methods',
     ['@babel/proposal-class-properties', {
       loose: true,
@@ -31,25 +42,17 @@ module.exports = api => ({
     ['@babel/transform-classes', {
       loose: true,
     }],
-    ['@babel/transform-runtime', {
-      corejs: 2,
-    }],
-    api.env() === 'test' && 'istanbul',
     ['module-resolver', {
       root: api.env() === 'test'
         ? ['./src', './spec']
         : ['./src'],
     }],
     'ramda',
-  ].filter(Boolean),
-  presets: [
-    ['@babel/env', {
-      loose: true,
-      modules: 'commonjs',
-      targets: {
-        browsers: ['last 4 versions'],
-      },
-      useBuiltIns: false,
-    }],
-  ],
-})
+    api.env() === 'test' && 'istanbul',
+  ].filter(Boolean)
+
+  return {
+    plugins,
+    presets,
+  }
+}
