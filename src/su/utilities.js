@@ -25,8 +25,8 @@ export function isComparable(...lengths) {
 }
 
 export function mapAddUnits(map, value) {
-  let { length, unit } = validate.validMeasure(value)
-  let has = map[unit] || 0
+  const { length, unit } = validate.validMeasure(value)
+  const has = map[unit] || 0
   return Object.assign({}, map, { [unit]: has + length })
 }
 
